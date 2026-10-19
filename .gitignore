@@ -1,0 +1,10 @@
+.neopilot/
+__pycache__/
+*.pyc
+*.apk
+*.idsig
+*.keystore
+android/build/
+android/assets/
+site/
+.backup/
