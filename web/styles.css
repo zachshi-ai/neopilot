@@ -1,0 +1,207 @@
+/* NeoPilot 2.0 样式
+   设计取向：移动优先、底部导航（App 观感），飞书蓝做唯一强调色，
+   信息层级靠字重和留白区分，不靠边框和阴影堆叠。 */
+
+:root {
+  --brand: #3370FF;
+  --brand-deep: #1F4FD8;
+  --brand-weak: #E8EFFF;
+  --ink: #1F2329;
+  --ink-2: #51565D;
+  --ink-3: #8F959E;
+  --line: #EBEDF0;
+  --bg: #F5F6F7;
+  --surface: #FFFFFF;
+  --ok: #34C724;
+  --warn: #FF8800;
+  --bad: #F54A45;
+  --radius: 16px;
+  --shadow: 0 1px 2px rgba(31, 35, 41, .04), 0 6px 20px rgba(31, 35, 41, .05);
+  --tab-h: 62px;
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html, body {
+  margin: 0; padding: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB",
+               "Microsoft YaHei", "Source Han Sans SC", sans-serif;
+  font-size: 14px; line-height: 1.58;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── 顶部 ───────────────────────────────────────────── */
+.topbar {
+  position: sticky; top: 0; z-index: 20;
+  padding: calc(env(safe-area-inset-top) + 14px) 18px 14px;
+  background: linear-gradient(135deg, #3370FF 0%, #1F4FD8 100%);
+  color: #fff;
+  border-radius: 0 0 22px 22px;
+  box-shadow: 0 6px 22px rgba(51, 112, 255, .22);
+}
+.brand { display: flex; align-items: center; gap: 9px; font-size: 18px; font-weight: 700; letter-spacing: .2px; }
+.brand-mark {
+  width: 11px; height: 11px; border-radius: 50%;
+  background: #6CF18C; box-shadow: 0 0 0 4px rgba(108, 241, 140, .22);
+}
+.brand small { font-size: 11.5px; font-weight: 500; opacity: .72; letter-spacing: .5px; }
+.sync {
+  display: flex; align-items: center; gap: 7px;
+  margin-top: 7px; font-size: 12px; opacity: .82;
+}
+.sync i { width: 5px; height: 5px; border-radius: 50%; background: #6CF18C; display: inline-block; }
+.sync.stale i { background: #FFD666; }
+
+/* ── 主体 ───────────────────────────────────────────── */
+main {
+  padding: 16px 14px calc(var(--tab-h) + env(safe-area-inset-bottom) + 22px);
+  max-width: 760px; margin: 0 auto;
+}
+.panel { display: none; }
+.panel.on { display: block; }
+
+.card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 16px;
+  margin-bottom: 12px;
+}
+.card-head {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 10px; margin-bottom: 12px;
+}
+.card-title { font-size: 14.5px; font-weight: 650; letter-spacing: .1px; }
+.card-sub { font-size: 11.5px; color: var(--ink-3); }
+
+/* ── 今日实况 ────────────────────────────────────────── */
+.hero-card { padding: 18px 16px 16px; }
+.temp-row { display: flex; align-items: flex-end; gap: 12px; margin-bottom: 4px; }
+.temp { font-size: 44px; font-weight: 700; line-height: 1; letter-spacing: -1.5px; }
+.temp-meta { padding-bottom: 6px; }
+.temp-meta .cond { font-size: 14px; font-weight: 600; }
+.temp-meta .place { font-size: 12px; color: var(--ink-3); margin-top: 2px; }
+
+.stat-row {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 8px; margin: 14px 0 4px;
+}
+.stat {
+  background: #F7F8FA; border-radius: 11px; padding: 9px 11px;
+}
+.stat b { display: block; font-size: 15px; font-weight: 650; font-variant-numeric: tabular-nums; }
+.stat span { font-size: 10.5px; color: var(--ink-3); }
+
+.headline {
+  background: #FFF9EB; border: 1px solid #FFE7B3; color: #8A6100;
+  border-radius: 11px; padding: 10px 12px; font-size: 12.5px;
+  margin-top: 12px; line-height: 1.6;
+}
+.headline:empty { display: none; }
+
+/* 日程 / 待跑 共用的行 */
+.row {
+  display: flex; align-items: center; gap: 12px;
+  padding: 9px 0; border-bottom: 1px dashed var(--line);
+}
+.row:last-child { border-bottom: none; }
+.row-time {
+  font-size: 12px; font-weight: 650; color: var(--brand);
+  font-variant-numeric: tabular-nums; min-width: 84px;
+}
+.row-main { font-size: 13px; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.row-tail { font-size: 11px; color: var(--ink-3); white-space: nowrap; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.chip {
+  font-size: 11.5px; padding: 3px 9px; border-radius: 7px;
+  background: #F2F3F5; color: var(--ink-2);
+}
+
+/* ── 例程 ───────────────────────────────────────────── */
+.routine { display: flex; flex-direction: column; gap: 8px; padding: 13px 14px; }
+.routine + .routine { margin-top: 10px; }
+.r-top { display: flex; align-items: center; gap: 8px; }
+.r-name { font-size: 14px; font-weight: 620; flex: 1; }
+.r-desc { font-size: 12px; color: var(--ink-2); }
+.r-meta { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 11.5px; color: var(--ink-3); }
+.r-steps { display: flex; flex-wrap: wrap; gap: 5px; }
+
+.tag {
+  font-size: 10.5px; padding: 2px 8px; border-radius: 20px;
+  background: var(--brand-weak); color: var(--brand-deep); font-weight: 600;
+  white-space: nowrap;
+}
+.tag.off { background: #F2F3F5; color: var(--ink-3); }
+.tag.ok { background: #E8F8E6; color: #2BA31E; }
+.tag.warn { background: #FFF3E0; color: #B35B00; font-weight: 700; }
+.tag.bad { background: #FEECEC; color: #D63A36; }
+
+.bar { height: 4px; border-radius: 3px; background: #EFF0F1; overflow: hidden; }
+.bar > i { display: block; height: 100%; border-radius: 3px; background: var(--brand); }
+.bar.ok > i { background: var(--ok); }
+.bar.warn > i { background: var(--warn); }
+.bar.bad > i { background: var(--bad); }
+
+/* ── 能力 ───────────────────────────────────────────── */
+.search {
+  width: 100%; border: 1px solid var(--line); border-radius: 12px;
+  padding: 10px 13px; font-size: 13px; font-family: inherit;
+  background: var(--surface); outline: none; margin-bottom: 12px;
+}
+.search:focus { border-color: var(--brand); box-shadow: 0 0 0 3px rgba(51, 112, 255, .1); }
+
+.cap-legend {
+  display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: center;
+  font-size: 11.5px; color: var(--ink-3); margin: 2px 0 12px;
+}
+.dot-sm { width: 7px; height: 7px; border-radius: 50%; display: inline-block; margin-right: 5px; vertical-align: 1px; }
+.dot-sm.ok { background: var(--ok); }
+.dot-sm.fail { background: var(--bad); }
+.dot-sm.skip { background: var(--warn); }
+.dot-sm.untested { background: #C9CDD4; }
+
+.cap-cat { font-size: 12px; font-weight: 650; color: var(--ink-2); margin: 14px 0 7px; }
+.cap {
+  display: flex; align-items: center; gap: 9px;
+  background: var(--surface); border-radius: 11px; padding: 10px 12px;
+  margin-bottom: 6px; box-shadow: 0 1px 2px rgba(31, 35, 41, .04);
+}
+.cap-dot { width: 6px; height: 6px; border-radius: 50%; flex: none; }
+.cap-dot.ok { background: var(--ok); }
+.cap-dot.fail { background: var(--bad); }
+.cap-dot.skip { background: var(--warn); }
+.cap-dot.untested { background: #C9CDD4; }
+.cap-name { font-size: 13px; font-weight: 550; flex: 1; min-width: 0; }
+.cap-name em { display: block; font-style: normal; font-size: 10.5px; color: var(--ink-3); font-weight: 400; }
+.cap-kind { font-size: 10px; padding: 1px 7px; border-radius: 5px; background: #F2F3F5; color: var(--ink-2); }
+.cap-kind.write { background: #FFF3E0; color: #C96A00; }
+.cap-kind.navigate { background: #EDE9FE; color: #6B32D6; }
+
+/* ── 底部导航 ────────────────────────────────────────── */
+.tabbar {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
+  height: calc(var(--tab-h) + env(safe-area-inset-bottom));
+  padding-bottom: env(safe-area-inset-bottom);
+  display: flex;
+  background: rgba(255, 255, 255, .94);
+  backdrop-filter: saturate(180%) blur(14px);
+  border-top: 1px solid var(--line);
+}
+.tab {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 2px;
+  font-size: 10.5px; color: var(--ink-3); cursor: pointer; user-select: none;
+}
+.tab.on { color: var(--brand); font-weight: 650; }
+.tab .ico { width: 21px; height: 21px; line-height: 0; font-style: normal; }
+.tab .ico svg { width: 21px; height: 21px; }
+
+.empty { text-align: center; color: var(--ink-3); font-size: 12.5px; padding: 22px 0; }
+.foot { text-align: center; color: var(--ink-3); font-size: 11px; padding: 18px 0 4px; line-height: 1.9; }
+
+@media (min-width: 640px) {
+  .stat-row { grid-template-columns: repeat(3, 1fr); }
+}
