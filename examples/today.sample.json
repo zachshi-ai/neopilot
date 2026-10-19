@@ -1,0 +1,37 @@
+{
+  "captured_at": "2026-10-19 09:10",
+  "source_run": "demo",
+  "address": "示例市示例区示例路 1 号",
+  "city": "示例市 示例区",
+  "now": {
+    "text": "晴",
+    "temp": "26℃",
+    "humidity": "55%",
+    "aqi": 30,
+    "quality": "优"
+  },
+  "today": {
+    "day": "晴",
+    "night": "多云",
+    "high": "31℃",
+    "low": "24℃",
+    "pop": 10,
+    "sunrise": "06:10",
+    "sunset": "18:05"
+  },
+  "tips": [
+    "短袖",
+    "注意防晒",
+    "适宜洗车"
+  ],
+  "battery": "76%",
+  "events": [
+    {
+      "title": "示例日程",
+      "start": "10:00",
+      "end": "11:00",
+      "alarm": true
+    }
+  ],
+  "headline": "此刻 26℃ 晴，今天 24–31℃，降水概率 10%，适合出门。"
+}
