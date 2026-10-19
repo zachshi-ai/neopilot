@@ -39,14 +39,17 @@ echo "[6/7] 对齐"
 $BT/zipalign -f -p 4 build/assembled.apk build/aligned.apk
 
 echo "[7/7] 签名"
-if [ ! -f ../neopilot.keystore ]; then
-  keytool -genkeypair -keystore ../neopilot.keystore -alias neopilot \
+# 签名密钥与口令不入库：首次构建自动生成 keystore，口令取 KS_PASS（未设置则随机生成并打印一次）
+KS=${KEYSTORE:-../neopilot.keystore}
+if [ ! -f "$KS" ]; then
+  if [ -z "${KS_PASS:-}" ]; then KS_PASS=$(openssl rand -hex 12); echo "[info] 本次生成的 keystore 口令：$KS_PASS（请自行保存）"; fi
+  keytool -genkeypair -keystore "$KS" -alias neopilot \
     -keyalg RSA -keysize 2048 -validity 10000 \
-    -storepass neopilot -keypass neopilot \
-    -dname "CN=NeoPilot, OU=STEPX, O=Zach, L=Shenzhen, C=CN" >/dev/null 2>&1
+    -storepass "$KS_PASS" -keypass "$KS_PASS" \
+    -dname "CN=NeoPilot, OU=STEPX, O=zachshi-ai, C=CN" >/dev/null 2>&1
 fi
-$BT/apksigner sign --ks ../neopilot.keystore \
-  --ks-pass pass:neopilot --key-pass pass:neopilot \
+$BT/apksigner sign --ks "$KS" \
+  --ks-pass "pass:${KS_PASS:?请设置签名口令 KS_PASS}" --key-pass "pass:${KEY_PASS:-$KS_PASS}" \
   --out ../NeoPilot.apk build/aligned.apk
 
 $BT/apksigner verify --print-certs ../NeoPilot.apk | head -4
