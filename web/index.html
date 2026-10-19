@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=1">
+<meta name="theme-color" content="#3370FF">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<title>NeoPilot</title>
+<style>__CSS__</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark"></span>NeoPilot
+    <small>STEPX NEO</small>
+  </div>
+  <div class="sync" id="sync">
+    <i></i><span id="sync-text">正在读取…</span>
+  </div>
+</header>
+
+<main>
+  <section class="panel on" id="p-home"></section>
+  <section class="panel" id="p-routines"></section>
+  <section class="panel" id="p-caps"></section>
+  <div class="foot">NeoPilot 2.0 · 数据保存在本机，不上传、不外联</div>
+</main>
+
+<nav class="tabbar">
+  <div class="tab on" onclick="NeoPilotTab('home', this)">
+    <i class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+      stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/>
+      <path d="M12 7v5l3 2"/></svg></i><span>总览</span>
+  </div>
+  <div class="tab" onclick="NeoPilotTab('routines', this)">
+    <i class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+      stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h10"/></svg></i><span>例程</span>
+  </div>
+  <div class="tab" onclick="NeoPilotTab('caps', this)">
+    <i class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+      stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="7" height="7" rx="2"/>
+      <rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="7" height="7" rx="2"/>
+      <rect x="13" y="13" width="7" height="7" rx="2"/></svg></i><span>能力</span>
+  </div>
+</nav>
+
+<script type="application/json" id="bootstrap">__BOOTSTRAP__</script>
+<script>__JS__</script>
+</body>
+</html>
